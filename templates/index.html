@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form, render_field %}
+
+{% block content %}
+    <h1 class="display-2">Konwertowanie grafiku</h1>
+    <p class="lead">
+        Wrzuć skoroszyt w formacie <strong>xsl</strong>, program wypluje skonwertowany arkusz xslx
+    </p>
+
+    <div class="container rounded-top bg-light text-secondary p-5">
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            {%- for msg in errors %}
+                {{ msg }}
+            {% endfor -%}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% with successes = get_flashed_messages(category_filter=["success"]) %}
+        {% if successes %}
+        <div class="alert alert-success" role="alert">
+          <a class="close" href="#">×</a>
+          <ul>
+            {%- for msg in successes %}
+            <li>{{ msg }}</li>
+            {% endfor -%}
+          </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {{ render_form(form, method="post", action="/transform") }}
+    </div>
+
+{% endblock %}

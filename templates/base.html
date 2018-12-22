@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Konwertowanie grafiku</title>
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/base.css') }}">
+</head>
+<body>
+<main class="container">
+    {% block content %}{% endblock %}
+    <footer class="text-center">
+        {% block footer %}
+            <small> &copy; 2018 <a href="https://github.com/ronek22" title="Wszystko pięknie działa dzięki ronek22">Jakub Ronkiewicz</a>
+            </small>
+        {% endblock %}
+    </footer>
+</main>
+{{ bootstrap.load_js() }}
+</body>
+</html>
