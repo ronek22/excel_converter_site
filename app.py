@@ -30,14 +30,9 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/')
-def index():
-    form = FileForm()
-    return render_template("index.html", form=form)
-
-
-@app.route('/transform', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload_file():
+    form = FileForm()
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('Nie dodałeś/aś pliku', 'error')
@@ -55,7 +50,7 @@ def upload_file():
             return redirect(url_for('download_file', output='converted.xlsx', input_f=filename))
         else:
             flash("Tylko arkusze z rozszerzeniem .xsl", 'error')
-    return render_template("index.html", form=FileForm())
+    return render_template("index.html", form=form)
 
 
 @app.route('/download/<input_f>/<output>', methods=['GET'])
@@ -73,4 +68,5 @@ def download_file(input_f, output):
 
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
