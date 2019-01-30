@@ -163,7 +163,7 @@ def convert(file):
         worksheet.cell(1, s_col + 3, wyspa)
         i = y = 0
         for (work) in (worksheet.iter_cols(min_row=3, max_row=len(days) + 2, min_col=s_col + 3,
-                                           max_col=s_col + peoples.count() * 2 + 2)):
+                                           max_col=s_col + peoples.count() * 2 + 2)):  # Loop to fill all working days given person
             person = peoples.get_person_by_id(i)
             if y % 2 == 0:
                 day_no = 0
@@ -175,7 +175,7 @@ def convert(file):
                     elif person.get_place_of_day(day_no) == wyspa:
                         day.value = person.get_time_of_day(day_no)
                     day_no += 1
-                    y += 1
+                y += 1
             else:  # HOURS
                 i += 1
                 day_no = 0
@@ -218,13 +218,12 @@ def convert(file):
     write_header(ws)
     write_table(ws)
 
-    write_days(ws, 1)
-    write_header(ws, 1)
-    write_table_wyspa(ws, 'focus')
-
-    write_days(ws, 2)
-    write_header(ws, 2)
-    write_table_wyspa(ws, 'arkady', 2)
+    start_i = 1
+    for place in places.list:
+        write_days(ws, start_i)
+        write_header(ws, start_i)
+        write_table_wyspa(ws, place.name, start_i)
+        start_i += 1
 
     return wb
     #endregion

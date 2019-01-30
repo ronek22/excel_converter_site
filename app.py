@@ -1,10 +1,10 @@
 import os
+
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, after_this_request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, BooleanField, PasswordField, FileField, validators
-from wtforms.validators import DataRequired, Length
 from werkzeug.utils import secure_filename
+from wtforms import SubmitField, FileField
 
 from script.excel import convert
 
