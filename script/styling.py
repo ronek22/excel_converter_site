@@ -57,6 +57,10 @@ weekend_fill = PatternFill(fill_type='solid',
                         start_color='CCC0DA',
                         end_color='CCC0DA')
 
+urlop_fill = PatternFill(fill_type='solid',
+                        start_color='ffff00',
+                        end_color='ffff00')
+
 
 
 

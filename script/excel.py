@@ -38,15 +38,16 @@ def convert(file):
 
     def get_val_color(row, col):
         cell = sheet.cell(row, col).value
-        color = book.xf_list[sheet.cell_xf_index(row, col)].background.background_colour_index
+        color = book.xf_list[sheet.cell_xf_index(row, col)].background.pattern_colour_index
         return cell, color
 
     def fill_places():
         list_of_places = Places()
         for i in range(1, cols):
             if sheet.cell(0, i).value != "":
-                list_of_places.add_place(Place(sheet.cell(0, i).value, book.xf_list[
-                    sheet.cell_xf_index(0, i)].background.background_colour_index))
+                place, color = sheet.cell(0, i).value, book.xf_list[sheet.cell_xf_index(0, i)].background.pattern_colour_index
+                print(f"{sheet.cell_xf_index(0,i)} | {place} | {color}")
+                list_of_places.add_place(Place(sheet.cell(0, i).value, color))
         return list_of_places
 
     def fill_people():

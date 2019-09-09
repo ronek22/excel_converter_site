@@ -1,9 +1,11 @@
+from ..models.place import Place
+
 class Places:
     def __init__(self):
         self.list = list()
 
-    def add_place(self, place):
-        self.list.append(place)
+    def add_place(self, place: Place):
+        self.list.append(place) if place not in self.list else print("Already in list")
 
     def get_color(self, place):
         for item in self.list:
